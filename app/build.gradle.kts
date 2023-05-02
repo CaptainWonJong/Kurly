@@ -1,5 +1,4 @@
 import extensions.*
-import plugins.applyComposeConfig
 
 plugins {
     id("com.android.application")

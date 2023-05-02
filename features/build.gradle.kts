@@ -17,6 +17,7 @@ dependencies {
     addHiltDependencies()
     addComposeDependencies()
     implementation(libs.io.coil.kt.compose)
+    implementation(libs.androidx.core.splash)
 }
 
 android {
