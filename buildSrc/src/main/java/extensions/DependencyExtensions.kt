@@ -74,8 +74,8 @@ val DependencyHandler.DataModule
 val DependencyHandler.DomainModule
     get() = implementation(project(mapOf("path" to ModulePath.Domain)))
 
-val DependencyHandler.FeatureModule
-    get() = implementation(project(mapOf("path" to ModulePath.Feature)))
+val DependencyHandler.FeaturesModule
+    get() = implementation(project(mapOf("path" to ModulePath.Features)))
 
 val DependencyHandler.DesignSystemModule
     get() = implementation(project(mapOf("path" to ModulePath.DesignSystem)))
