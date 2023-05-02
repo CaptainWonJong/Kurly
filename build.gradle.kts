@@ -1,4 +1,5 @@
 import plugins.applyAndroidLibraryConfig
+import plugins.applyJavaLibraryConfig
 
 plugins {
     id(libs.plugins.android.application.get().pluginId) apply false
@@ -13,6 +14,7 @@ plugins {
 subprojects {
     when (name) {
         ModulePath.App -> { /* Nothing */ }
+        ModulePath.Domain -> applyJavaLibraryConfig()
         else -> applyAndroidLibraryConfig()
     }
 }
