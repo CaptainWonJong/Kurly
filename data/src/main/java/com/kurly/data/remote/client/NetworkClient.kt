@@ -44,11 +44,7 @@ object NetworkClient {
         writeTimeout(TIMEOUT, TimeUnit.SECONDS)
 
         addInterceptor(HttpLoggingInterceptor().apply {
-            if (BuildConfig.DEBUG) {
-                HttpLoggingInterceptor.Level.BODY
-            } else {
-                HttpLoggingInterceptor.Level.NONE
-            }
+            HttpLoggingInterceptor.Level.BODY
         })
         addInterceptor(provideRequest())
         addInterceptor(provideResponse())

@@ -9,7 +9,9 @@ import com.kurly.domain.repository.GithubRepoRepository
 class GetGithubRepos(
     private val repository: GithubRepoRepository
 ) {
-    suspend operator fun invoke(param: Param): List<GithubRepoEntity> = repository.getRepositories(param.searchQuery)
+    suspend operator fun invoke(param: Param): Result<List<GithubRepoEntity>> = runCatching {
+        repository.getRepositories(param.searchQuery)
+    }
 
     data class Param(
         val searchQuery: String

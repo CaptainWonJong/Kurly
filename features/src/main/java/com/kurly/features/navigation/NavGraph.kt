@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.kurly.features.screen.search.SearchScreen
+import com.kurly.features.screen.search.SearchRoute
 import com.kurly.features.screen.splash.SplashScreen
 
 /**
@@ -18,7 +18,7 @@ fun SetUpNavGraph(navController: NavHostController) {
             SplashScreen(navController = navController)
         }
         composable(route = ScreenRouter.Search.route) {
-            SearchScreen()
+            SearchRoute()
         }
     }
 }
