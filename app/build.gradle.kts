@@ -32,6 +32,10 @@ android {
 }
 
 dependencies {
+    DataModule
+    DomainModule
+    FeaturesModule
+
     addLocalDependencies()
     addRemoteDependencies()
     addHiltDependencies()

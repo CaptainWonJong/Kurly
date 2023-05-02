@@ -7,6 +7,8 @@ applySerializationPluginConfig()
 applyHiltPluginConfig()
 
 dependencies {
+    DomainModule
+
     implementation(libs.serialization)
     addRemoteDependencies()
     addLocalDependencies()

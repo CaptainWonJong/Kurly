@@ -12,6 +12,7 @@ applyComposeConfig()
 
 dependencies {
     DomainModule
+    DesignSystemModule
 
     addHiltDependencies()
     addComposeDependencies()
