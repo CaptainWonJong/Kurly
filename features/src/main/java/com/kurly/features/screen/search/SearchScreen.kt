@@ -4,6 +4,9 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -17,9 +20,7 @@ import com.kurly.designsystem.component.textfield.SearchTextField
 import com.kurly.designsystem.utils.addFocusClear
 import com.kurly.features.screen.search.effects.HandleSearchSideEffects
 import com.kurly.features.screen.search.state.SearchItemState
-import com.kurly.features.screen.search.view.SearchEmptyView
-import com.kurly.features.screen.search.view.SearchErrorView
-import com.kurly.features.screen.search.view.SearchRepositoryLinearColumn
+import com.kurly.features.screen.search.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
@@ -63,8 +64,7 @@ private fun SearchScreen(
         SearchTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 8.dp)
-            ,
+                .padding(horizontal = 8.dp),
             searchQuery = searchQuery,
             onValueChange = typing
         )
@@ -76,8 +76,7 @@ private fun SearchScreen(
                 LoadingProgress(
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
-                        .padding(top = 20.dp)
-                    ,
+                        .padding(top = 20.dp),
                     progressType = ProgressType.Large
                 )
             }
@@ -89,10 +88,28 @@ private fun SearchScreen(
                 Toast.makeText(LocalContext.current, itemState.throwable.message, Toast.LENGTH_SHORT).show()
             }
             is SearchItemState.Content -> {
-                SearchRepositoryLinearColumn(
-                    searchItems = itemState.items,
-                    onClickItem = onClick
+                var isLinear by rememberSaveable { mutableStateOf(true) }
+                SearchItemToggleRow(
+                    isLinear = isLinear,
+                    onClickLinear = {
+                        isLinear = true
+                    },
+                    onClickGrid = {
+                        isLinear = false
+                    }
                 )
+
+                if (isLinear) {
+                    SearchRepositoryLinearColumn(
+                        searchItems = itemState.items,
+                        onClickItem = onClick
+                    )
+                } else {
+                    SearchRepositoryGridColumn(
+                        searchItems = itemState.items,
+                        onClickItem = onClick
+                    )
+                }
             }
         }
     }

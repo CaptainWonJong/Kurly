@@ -18,8 +18,7 @@ fun SearchRepositoryLinearColumn(
     onClickItem: (String) -> Unit,
 ) {
     LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
+        modifier = modifier.fillMaxSize()
     ) {
         items(
             items = searchItems,

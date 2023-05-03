@@ -18,6 +18,7 @@ fun SearchTextField(
     OutlinedTextField(
         modifier = modifier,
         value = searchQuery,
-        onValueChange = onValueChange
+        singleLine = true,
+        onValueChange = onValueChange,
     )
 }
