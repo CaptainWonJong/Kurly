@@ -1,4 +1,5 @@
 import extensions.*
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -11,13 +12,19 @@ android {
     namespace = "com.kurly.app"
     compileSdk = Versions.CompileSdkVersion
 
+    val props = File(rootDir, "gradle.properties").inputStream().use {
+        Properties().apply { load(it) }
+    }
+    val propsVersionCode = (props.getValue("versionCode") as? String)?.toInt() ?: 1
+    val propsVersionName = (props.getValue("versionName") as? String) ?: ""
+
     defaultConfig {
         applicationId = "com.kurly.app"
         minSdk = Versions.MinSdkVersion
         targetSdk = Versions.TargetSdkVersion
 
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = propsVersionCode
+        versionName = propsVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
