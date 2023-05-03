@@ -54,7 +54,7 @@ class SearchViewModel @Inject constructor(
                         emit(SearchItemState.Content(items = items))
                     }
                 }.onFailure {
-                    emit(SearchItemState.Error)
+                    emit(SearchItemState.Error(it))
                     it.printStackTrace()
                 }
             }

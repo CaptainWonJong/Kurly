@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalAnimationApi::class)
 
-package com.kurly.designsystem.component
+package com.kurly.designsystem.component.text
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.wrapContentSize

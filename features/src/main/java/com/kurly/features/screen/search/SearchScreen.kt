@@ -1,28 +1,32 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.kurly.features.screen.search
 
-import androidx.compose.foundation.clickable
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kurly.designsystem.component.progress.LoadingProgress
+import com.kurly.designsystem.component.progress.ProgressType
+import com.kurly.designsystem.component.textfield.SearchTextField
+import com.kurly.designsystem.utils.addFocusClear
 import com.kurly.features.screen.search.effects.HandleSearchSideEffects
-import com.kurly.features.screen.search.items.SearchItem
 import com.kurly.features.screen.search.state.SearchItemState
+import com.kurly.features.screen.search.view.SearchEmptyView
+import com.kurly.features.screen.search.view.SearchErrorView
+import com.kurly.features.screen.search.view.SearchRepositoryLinearColumn
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * Created by CaptainWonJong@gmail.com on 2023-05-02
  */
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 internal fun SearchRoute(
     viewModel: SearchViewModel = hiltViewModel()
@@ -47,54 +51,48 @@ private fun SearchScreen(
     typing: (String) -> Unit,
     onClick: (String) -> Unit
 ) {
+    val focusManager = LocalFocusManager.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .addFocusClear(focusManager)
     ) {
         Spacer(modifier = Modifier.height(8.dp))
 
-        OutlinedTextField(
-            value = searchQuery,
+        SearchTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp)
+            ,
+            searchQuery = searchQuery,
             onValueChange = typing
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // TODO: UI Component 개발
         when (val itemState = searchItemState()) {
             is SearchItemState.Loading -> {
-                Text(text = "Loading")
+                LoadingProgress(
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(top = 20.dp)
+                    ,
+                    progressType = ProgressType.Large
+                )
             }
             is SearchItemState.Empty -> {
-                Text(text = "Empty")
+                SearchEmptyView()
             }
             is SearchItemState.Error -> {
-                Text(text = "Error")
+                SearchErrorView()
+                Toast.makeText(LocalContext.current, itemState.throwable.message, Toast.LENGTH_SHORT).show()
             }
             is SearchItemState.Content -> {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    items(
-                        items = itemState.items,
-                        key = { it.hashCode() }
-                    ) { item: SearchItem ->
-                        when (item) {
-                            is SearchItem.Repository -> {
-                                Text(
-                                    modifier = Modifier.clickable {
-                                        onClick(item.description)
-                                    },
-                                    text = item.name
-                                )
-                            }
-                            else -> {
-                                // Draw another item
-                            }
-                        }
-                    }
-                }
+                SearchRepositoryLinearColumn(
+                    searchItems = itemState.items,
+                    onClickItem = onClick
+                )
             }
         }
     }

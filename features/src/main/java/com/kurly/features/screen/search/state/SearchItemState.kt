@@ -14,5 +14,7 @@ sealed interface SearchItemState {
         val items: List<SearchItem>
     ) : SearchItemState
 
-    object Error : SearchItemState
+    data class Error(
+        val throwable: Throwable
+    ) : SearchItemState
 }
