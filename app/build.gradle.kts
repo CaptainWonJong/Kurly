@@ -1,5 +1,5 @@
 import extensions.*
-import plugins.applyComposeConfig
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -12,13 +12,19 @@ android {
     namespace = "com.kurly.app"
     compileSdk = Versions.CompileSdkVersion
 
+    val props = File(rootDir, "gradle.properties").inputStream().use {
+        Properties().apply { load(it) }
+    }
+    val propsVersionCode = (props.getValue("versionCode") as? String)?.toInt() ?: 1
+    val propsVersionName = (props.getValue("versionName") as? String) ?: ""
+
     defaultConfig {
         applicationId = "com.kurly.app"
         minSdk = Versions.MinSdkVersion
         targetSdk = Versions.TargetSdkVersion
 
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = propsVersionCode
+        versionName = propsVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,9 +38,10 @@ android {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    DataModule
+    DomainModule
+    FeaturesModule
+
     addLocalDependencies()
     addRemoteDependencies()
     addHiltDependencies()

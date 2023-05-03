@@ -8,6 +8,7 @@ androidxAppcompat = "1.5.1"
 androidxLifecycle = "2.6.0-alpha04"
 material = "1.7.0"
 constraintlayout = "2.1.4"
+navigation = "2.5.3"
 
 okhttp3 = "5.0.0-alpha.6"
 retrofit = "2.9.0"
@@ -16,6 +17,7 @@ serializationConverter = "0.8.0"
 dagger = "2.44.2"
 room = "2.4.3"
 sqlite = "3.34.0"
+splash = "1.0.0"
 
 composeBom = "2023.01.00"
 ioCoilKt = "2.2.2"
@@ -34,6 +36,7 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidxActivity" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidxFragment" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidxAppcompat" }
+androidx-core-splash = {module = "androidx.core:core-splashscreen", version.ref = "splash"}
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutine" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp3" }
@@ -79,6 +82,7 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 androidx-compose-activity = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidx-compose-constraintlayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "composeConstraintLayout" }
 androidx-compose-hilt-navigation = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "composeHilt" }
+androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 androidx-accompanist-placeholder = { module = "com.google.accompanist:accompanist-placeholder", version.ref = "accompanist" }
 androidx-accompanist-placeholder-material = { module = "com.google.accompanist:accompanist-placeholder-material", version.ref = "accompanist" }
 

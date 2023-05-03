@@ -60,6 +60,7 @@ fun Project.addComposeDependencies() {
 
         implementation(libs.androidx.compose.activity)
         implementation(libs.androidx.compose.hilt.navigation)
+        implementation(libs.androidx.compose.navigation)
         implementation(libs.androidx.compose.constraintlayout)
         implementation(libs.androidx.compose.lifecycle.viewmodel)
         implementation(libs.androidx.compose.lifecycle.runtime)
@@ -74,8 +75,8 @@ val DependencyHandler.DataModule
 val DependencyHandler.DomainModule
     get() = implementation(project(mapOf("path" to ModulePath.Domain)))
 
-val DependencyHandler.FeatureModule
-    get() = implementation(project(mapOf("path" to ModulePath.Feature)))
+val DependencyHandler.FeaturesModule
+    get() = implementation(project(mapOf("path" to ModulePath.Features)))
 
 val DependencyHandler.DesignSystemModule
     get() = implementation(project(mapOf("path" to ModulePath.DesignSystem)))
