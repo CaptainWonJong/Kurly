@@ -8,7 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.kurly.designsystem.component.SplashText
+import com.kurly.designsystem.component.text.SplashText
 import com.kurly.designsystem.foundation.PrimaryPurple
 import com.kurly.features.navigation.ScreenRouter
 import kotlinx.coroutines.delay

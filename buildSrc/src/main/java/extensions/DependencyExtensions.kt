@@ -60,6 +60,7 @@ fun Project.addComposeDependencies() {
 
         implementation(libs.androidx.compose.activity)
         implementation(libs.androidx.compose.hilt.navigation)
+        implementation(libs.androidx.compose.navigation)
         implementation(libs.androidx.compose.constraintlayout)
         implementation(libs.androidx.compose.lifecycle.viewmodel)
         implementation(libs.androidx.compose.lifecycle.runtime)
